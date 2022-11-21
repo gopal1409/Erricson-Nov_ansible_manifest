@@ -18,7 +18,7 @@
         content: "{{motd_redhat}}"
         #var.nameof
         dest: /etc/motd 
-      notify: MOTD changed Redhat 
+      notify: MOTD changed Redhat
       when: ansible_distribution == "RedHat"
     - name: configure motd for ubuntu 
       ansible.builtin.copy:

@@ -1,0 +1,59 @@
+---
+###any yaml file start with three dash
+-
+  hosts: all 
+#yaml follow the format of python this - list of items
+  #target where you want to run your play book 
+  #varaible : it is used for resusing the playbook
+  vars:
+    motd_redhat: "Welcome to Redhat System-rock\n"
+    motd_ubuntu: "Welcome to ubuntu\n"
+    #tomcat maven 
+  #task: the list of task that are going to execute
+  #handlers: handler will execute only if there is any change in the task 
+  tasks:
+  ##inside task you can define list 
+    - name: update redhat system 
+      - name: Import a key from a url
+        ansible.builtin.rpm_key:
+          state: present
+          key: https://download-ib01.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
+        when: ansible_distribution == "Redhat"
+      - name: install the epel release 
+        yum:
+          name: https://download-ib01.fedoraproject.org/pub/epel/epel-next-release-latest-9.noarch.rpm
+          update_cache: yes 
+          state: latest
+        when: ansible_distribution == "Redhat"
+      - name: update the ubuntu system 
+        apt: 
+          update_cache: yes
+        when: ansible_distribution == "Ubuntu"
+      - name: install nginx 
+        package: 
+          name: nginx 
+          state: latest #present absent
+      - name: install patch for redhat 
+        yum:
+          name: patch 
+          update_cache: yes 
+          state: latest 
+        when: ansible_distribution == "Redhat"
+      - name: create a directory called as site avaialbe
+        file:
+          path: /etc/nginx/sites-available
+          state: directory 
+      - name: create a directory called as site enabled
+        file:
+          path: /etc/nginx/sites-enabled
+          state: directory
+      - name: copy the default config 
+        copy:
+          src: files/nginx-default.conf
+          dest: /etc/nginx/sites-available/default 
+      - name: create a symbolic link from site avaiale to site enabled
+        file: 
+          src: /etc/nginx/sites-available/default 
+          dest: /etc/nginx/sites-enabled/default 
+      
+      
