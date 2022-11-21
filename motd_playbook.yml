@@ -1,0 +1,30 @@
+---
+###any yaml file start with three dash
+-
+  hosts: all 
+#yaml follow the format of python this - list of items
+  #target where you want to run your play book 
+  #varaible : it is used for resusing the playbook
+  vars:
+    motd_redhat: "Welcome to Redhat System\n"
+    motd_ubuntu: "Welcome to ubuntu\n"
+    #tomcat maven 
+  #task: the list of task that are going to execute
+  #handlers: handler will execute only if there is any change in the task 
+  tasks:
+  ##inside task you can define list 
+    - name: configure motd for redhat 
+      ansible.builtin.copy:
+        content: "{{motd_redhat}}"
+        #var.nameof
+        dest: /etc/motd 
+      when: ansible_distribution == "RedHat"
+    - name: configure motd for ubuntu 
+      ansible.builtin.copy:
+        content: "{{motd_ubuntu}}"
+        #var.nameof
+        dest: /etc/motd 
+      when: ansible_distribution == "Ubuntu"
+
+      #the command line is different in redhat ubuntu 
+     
