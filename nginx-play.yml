@@ -31,7 +31,7 @@
         when: ansible_distribution == "Ubuntu"
       - name: install nginx 
         package: 
-          name: nginx 
+          name: nginx #ntpd #tree
           state: latest #present absent
       - name: install patch for redhat 
         yum:
@@ -56,5 +56,23 @@
           src: /etc/nginx/sites-available/default 
           dest: /etc/nginx/sites-enabled/default 
           state: link
-      
+      - name: create a nginx/html directory 
+        file:
+          path: /usr/share/nginx/html 
+          state: directory
+      - name: template for test page 
+        template:
+          src: templates/index.html.j2
+          dest: /usr/share/nginx/html
+          mode: 0644
+      - name: restart nginx 
+        service:
+          name: nginx 
+          state: restarted #start stop
+        notify: CHECK HTTP Service 
+  handlers:
+    - name: CHECK HTTP Service
+      uri: 
+        url: http://{{ansible_default_ipv4.address}}
+        status_code: 200
       
