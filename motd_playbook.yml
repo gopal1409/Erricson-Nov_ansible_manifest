@@ -6,7 +6,7 @@
   #target where you want to run your play book 
   #varaible : it is used for resusing the playbook
   vars:
-    motd_redhat: "Welcome to Redhat System\n"
+    motd_redhat: "Welcome to Redhat System-rock\n"
     motd_ubuntu: "Welcome to ubuntu\n"
     #tomcat maven 
   #task: the list of task that are going to execute
