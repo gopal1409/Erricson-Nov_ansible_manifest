@@ -27,7 +27,7 @@
         dest: /etc/motd 
       notify: MOTD Changed Ubuntu 
       when: ansible_distribution == "Ubuntu"
-    handlers:
+  handlers:
     #the name of the handler will match the notify value
       - name: MOTD changed Redhat
         debug:
