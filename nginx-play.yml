@@ -13,7 +13,7 @@
   #handlers: handler will execute only if there is any change in the task 
   tasks:
   ##inside task you can define list 
-    - name: update redhat system 
+     
       - name: Import a key from a url
         ansible.builtin.rpm_key:
           state: present
