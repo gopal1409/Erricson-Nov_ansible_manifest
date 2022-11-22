@@ -20,14 +20,7 @@
         #var.nameof
         dest: /etc/motd 
       notify: MOTD changed Redhat
-      when: ansible_distribution == "RedHat"
-    - name: configure motd for ubuntu 
-      ansible.builtin.copy:
-        content: "{{motd_ubuntu}}"
-        #var.nameof
-        dest: /etc/motd 
-      notify: MOTD Changed Ubuntu 
-      when: ansible_distribution == "Ubuntu"
+      
   handlers:
     #the name of the handler will match the notify value
       - name: MOTD changed Redhat
