@@ -27,5 +27,5 @@
         when: 
           - item.required == True 
           - ansible_distribution == "RedHat"
-        loop: "{{ packages }}"
+        with_items: "{{ packages }}"
         
