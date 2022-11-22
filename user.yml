@@ -17,9 +17,13 @@
       - name: create a user johnd 
         ansible.builtin.user:
           name: johnd
-      - name: create user mike
+      - name: create users with loop
         ansible.builtin.user:
-          name: mike 
-          state: present #absent
+          name: '{{item}}'
+          state: present
+          loop:
+            - tom
+            - harry
+            - jerry
           ###this is duplication or i can say repeation
     
