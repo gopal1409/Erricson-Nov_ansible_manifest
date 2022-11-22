@@ -21,30 +21,36 @@
           state: present
           key: https://download-ib01.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-9
         when: ansible_distribution == "Redhat"
+        tags: rpmkey 
       - name: install the epel release 
         yum:
           name: https://download-ib01.fedoraproject.org/pub/epel/epel-next-release-latest-9.noarch.rpm
           update_cache: yes 
           state: latest
         when: ansible_distribution == "Redhat"
+        tags: rpm 
       - name: update the ubuntu system 
         apt: 
           update_cache: yes
         when: ansible_distribution == "Ubuntu"
+        tags: cache 
       - name: install nginx 
         package: 
           name: nginx #ntpd #tree
           state: latest #present absent
+        tags: package 
       - name: install patch for redhat 
         yum:
           name: patch 
           update_cache: yes 
           state: latest 
+        tags: patch 
         when: ansible_distribution == "Redhat"
       - name: create a directory called as site avaialbe
         file:
           path: /etc/nginx/sites-available
           state: directory 
+        
       - name: create a directory called as site enabled
         file:
           path: /etc/nginx/sites-enabled
@@ -72,6 +78,7 @@
           name: nginx 
           state: restarted #start stop
         notify: CHECK HTTP Service 
+        tags: service 
   handlers:
     - name: CHECK HTTP Service
       uri: 
