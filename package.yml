@@ -19,7 +19,6 @@
   #handlers: handler will execute only if there is any change in the task 
   tasks:
   ##inside task you can define list 
-     
       - name: install package on  Redhat
         dnf: 
           name: "{{item.name}}"
