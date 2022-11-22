@@ -1,0 +1,13 @@
+---
+
+  hosts: ubuntu 
+
+    
+  tasks:
+  
+     
+      - name: install openjdk 
+        package: 
+          name: default-jdk 
+          update_cache: yes
+          state: present 
