@@ -19,12 +19,18 @@
           name: johnd
       - name: create users with loop
         user:
-          name: '{{ item }}'
+          name: '{{ item.name }}' #two variable
+          uid: '{{ item.uid }}'
           state: present
-        loop:
-            - tom
-            - harry
-            - jerry
+          #in place of loop keyword you can use with_items both will give you same result
+        with_items:
+            - name: tom
+              uid: 1020
+            - name: harry
+              uid: 1030
+            - name: jerry
+              uid: 1040
+               
           ###this is duplication or i can say repeation
           #this is an standard loop
     
