@@ -1,0 +1,30 @@
+---
+###any yaml file start with three dash
+-
+  hosts: all 
+#yaml follow the format of python this - list of items
+  #target where you want to run your play book 
+  #varaible : it is used for resusing the playbook
+  vars:
+    packages:
+      - name: httpd 
+        required: True 
+      - name: ntpd
+        required: True 
+      - name: nopackage
+        required: False 
+    #tomcat maven 
+  #task: the list of task that are going to execute
+  #handlers: handler will execute only if there is any change in the task 
+  tasks:
+  ##inside task you can define list 
+     
+      - name: install package on {{item.name}} Redhat
+        dnf: 
+          name: "{{item.name}}"
+          state: present 
+        when: 
+          - item.required == True 
+          - ansible_distribution == "Redhat"
+        loop: "{{ packages }}"
+        

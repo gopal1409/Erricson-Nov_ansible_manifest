@@ -21,15 +21,36 @@
         user:
           name: '{{ item.name }}' #two variable
           uid: '{{ item.uid }}'
+          home: /home/{{item.name}}
           state: present
           #in place of loop keyword you can use with_items both will give you same result
         with_items:
             - name: tom
               uid: 1020
+              home: /home/{{item.name}}
             - name: harry
               uid: 1030
             - name: jerry
               uid: 1040
+              home: /home/{{item.name}}
+      - name: create a user file 
+        file:
+          path: /tmp/ansible-{{item}}
+          state: directory #touch #hard #link #file
+        with_items:
+          - tom
+          - jerry 
+          - harry 
+      - name: install multiple package using loop
+        dnf:
+          name: "{{ item }}"
+          state: present 
+          update_cache: True 
+        with_items:
+          - httpd 
+          - php 
+          - vsftpd
+        when: ansible_distribution == 'Redhat'
                
           ###this is duplication or i can say repeation
           #this is an standard loop
