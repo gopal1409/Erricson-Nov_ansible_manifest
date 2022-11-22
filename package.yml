@@ -9,9 +9,9 @@
     packages:
       - name: httpd 
         required: True 
-      - name: tree
-        required: True 
       - name: ntpd
+        required: True 
+      - name: tree
         required: False
     #tomcat maven 
   #task: the list of task that are going to execute
