@@ -14,7 +14,12 @@
   tasks:
   ##inside task you can define list 
      
-      - name: create a user
+      - name: create a user johnd 
         ansible.builtin.user:
           name: johnd
+      - name: create user mike
+        ansible.builtin.user:
+          name: mike 
+          state: present #absent
+          ###this is duplication or i can say repeation
     
