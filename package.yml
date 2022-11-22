@@ -20,7 +20,7 @@
   tasks:
   ##inside task you can define list 
      
-      - name: install package on {{item.name}} Redhat
+      - name: install package on  Redhat
         dnf: 
           name: "{{item.name}}"
           state: present 
