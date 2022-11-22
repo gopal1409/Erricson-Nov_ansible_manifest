@@ -11,8 +11,7 @@
         required: True 
       - name: ntpd
         required: True 
-      - name: nopackage
-        required: False 
+     
     #tomcat maven 
   #task: the list of task that are going to execute
   #handlers: handler will execute only if there is any change in the task 
