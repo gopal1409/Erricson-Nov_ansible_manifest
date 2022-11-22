@@ -24,7 +24,7 @@
           name: "{{item.name}}"
           state: present 
         when: 
-          - item.required == True 
+          - item.required == "True" 
           - ansible_distribution == "Redhat"
         loop: "{{ packages }}"
         
