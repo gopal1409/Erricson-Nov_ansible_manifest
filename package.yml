@@ -5,7 +5,7 @@
 #yaml follow the format of python this - list of items
   #target where you want to run your play book 
   #varaible : it is used for resusing the playbook
-  
+  gather_facts: no
   vars:
     packages:
       - name: httpd 
