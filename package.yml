@@ -25,6 +25,6 @@
           state: present 
         when: 
           - item.required == True 
-          - ansible_distribution: "RedHat"
+          - ansible_distribution: "Redhat"
         loop: "{{ packages }}"
         
