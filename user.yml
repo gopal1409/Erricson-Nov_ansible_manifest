@@ -18,12 +18,13 @@
         ansible.builtin.user:
           name: johnd
       - name: create users with loop
-        ansible.builtin.user:
-          name: '{{item}}'
+        user:
+          name: '{{ item }}'
           state: present
-          loop:
+        loop:
             - tom
             - harry
             - jerry
           ###this is duplication or i can say repeation
+          #this is an standard loop
     
