@@ -22,12 +22,12 @@
           dest: /opt 
       - name: untar maven 
         unarchive:
-          src: /opt/apache-maven-3.8.6-bin
+          src: /opt/apache-maven-3.8.6
           dest: /opt 
           remote_src: yes
       - name: symbolic link for apache maven 
         file: 
-          src: /opt/apache-maven-3.8.6-bin
+          src: /opt/apache-maven-3.8.6
           dest: /opt/maven 
           state: link 
       - name: create a maven.sh 
