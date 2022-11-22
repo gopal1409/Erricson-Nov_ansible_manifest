@@ -22,7 +22,7 @@
           dest: /opt 
       - name: untar maven 
         unarchive:
-          src: /opt/apache-maven-3.8.6
+          src: /opt/apache-maven-3.8.6-bin.tar.gz
           dest: /opt 
           remote_src: yes
       - name: symbolic link for apache maven 
