@@ -11,7 +11,8 @@
         required: True 
       - name: ntpd
         required: True 
-     
+      - name: tree
+        required: False
     #tomcat maven 
   #task: the list of task that are going to execute
   #handlers: handler will execute only if there is any change in the task 
@@ -23,7 +24,7 @@
           name: "{{item.name}}"
           state: present 
         when: 
-          - item.required == "True" 
-          - ansible_distribution == "Redhat"
+          - item.required == True 
+          - ansible_distribution: "RedHat"
         loop: "{{ packages }}"
         
