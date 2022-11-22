@@ -4,8 +4,15 @@
   tasks:
   
      
-      - name: install openjdk 
+      - name: install openjdk ubuntu
         package: 
           name: default-jdk 
           update_cache: yes
           state: present 
+        when: ansible_distribution == "Ubuntu"
+      - name: install openjdk redhat
+        package: 
+          name: java-11-openjdk
+          update_cache: yes
+          state: present 
+        when: ansible_distribution == "RedHat"
