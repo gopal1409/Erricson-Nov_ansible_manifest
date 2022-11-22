@@ -16,3 +16,35 @@
           update_cache: yes
           state: present 
         when: ansible_distribution == "RedHat"
+      - name: download the maven package 
+        get_url:
+          url: https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+          dest: /opt 
+      - name: untar maven 
+        unarchive:
+          src: /opt/apache-maven-3.8.6-bin
+          dest: /opt 
+          remote_src: yes
+      - name: symbolic link for apache maven 
+        file: 
+          src: /opt/apache-maven-3.8.6-bin
+          dest: /opt/maven 
+          state: link 
+      - name: create a maven.sh 
+        file:
+          path: /etc/profile.d/maven.sh 
+          state: touch 
+          mode: u+rwx,g+rwx,o+rx 
+      - name: update maven.sh 
+        lineinfile:
+          path: /etc/profile.d/maven.sh
+          state: present 
+          line: "{{ item }}"
+        with_items: 
+          - export M2_HOME=/opt/maven
+          - export MAVEN_HOME=/opt/maven
+          - export PATH=${M2_HOME}/bin:${PATH}
+      - name: reload the deamon 
+        service:
+          daemon_reload: yes
+        when: ansible_service_mgr == 'systemd'
